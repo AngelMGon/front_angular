@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-angular
+spec:
+  selector:
+    matchLabels:
+      app: front-angular
+  replicas: 1 # deployment runs 3 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: front-angular
+    spec:
+      containers:
+      - name: front-angular
+        image: fra.ocir.io/fre4v6wtcvwd/demo/front-angular:latest
+        imagePullPolicy: Always
+        ports:
+        - name: front-angular
+          containerPort: 80 #Endpoint is at port 8080 in the container
+          protocol: TCP
+      imagePullSecrets:
+      - name: ocirsecret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-angular-lb
+  labels:
+    app: front-angular
+spec:
+  type: LoadBalancer #Exposes the service as a node port
+  ports:
+  - port: 80
+  selector:
+    app: front-angular

@@ -1,0 +1,17 @@
+<mat-card>
+    <mat-card-content>
+      <form [formGroup]="form">
+        <h2>Registro</h2>
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Nombre" formControlName="name" required>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input matInput placeholder="Email" formControlName="email" required>
+          </mat-form-field>
+          <mat-form-field class="full-width-input">
+            <input matInput placeholder="Dirección" formControlName="address" required>
+          </mat-form-field>
+        <button mat-raised-button color="primary" (click)="registration()">Registrarse</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
